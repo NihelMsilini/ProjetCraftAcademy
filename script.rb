@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 # Needed librairies
 require 'rubygems'
-# JSON module installation
-system 'gem install json > logs.txt && cat logs.txt'
-require 'json'
 # Update the system
 system 'echo "updating..."'
-system 'apt-get -y update >> logs.txt && cat logs.txt'
+system 'apt-get -y update > logs.txt && cat logs.txt'
+# JSON module installation
+system 'gem install json >> logs.txt && cat logs.txt'
+require 'json'
 # To read the json parameters file
 json = File.read('parameters.json')
 # To parse the json file
@@ -56,8 +56,7 @@ fichier = File.open("logs.txt", "r")
 i = 1
 chaine = ""
 fichier.each_line { |ligne|
-  chaine=chaine.concat"#{ligne}"
-  i += 1
+  chaine=chaine.concat"#{ligne}\n"
 }
 fichier.close
 # Database connection with host : localhost and port : 6379
@@ -83,10 +82,10 @@ index.write("<!DOCTYPE html>
     }
 </style>
 </head>
-<body>
-<h1><center>This is my welcome page served by Nginx !</center></h1>
-<p><center>Generate an HTML page from a ruby script.</center></p>
-<p><em><center>Thank you for using nginx !!</center></em></p>
+<body bgcolor=\"#E6E6FA\">
+<h1><center>Log file content from Redis served by Nginx !</center></h1>
+<p><center>#{value} </center></p>
+<p><em><center><h2>This is the end of the log file !!</h2></center></em></p>
 </body>
 </html>")
 puts ' Run nginx server...'
