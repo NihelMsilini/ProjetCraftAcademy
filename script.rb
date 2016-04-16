@@ -10,6 +10,7 @@ json = File.read('parameters.json')
 # To parse the json file
 obj = JSON.parse(json)
 # Set parameters to configure
+puts 'config file json parsing'
 $hostname= obj['hostname']
 $banniere= obj['banniere']
 $nameserver= obj['nameserver']
