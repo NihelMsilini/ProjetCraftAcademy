@@ -26,3 +26,23 @@ banFile.write($banniere.to_s)
 # nameserver configuration
 serverFile=File.open("/etc/resolv.conf","a+")
 serverFile.write("nameserver ".concat($nameserver.to_s))
+# Installing nginx and Redis
+puts 'Installing nginx with a ruby script'
+# System update
+system "apt-get update > /dev/null 2>&1 "
+# Installing nginx server
+system "apt-get -y  install nginx > /dev/null 2<&1"
+# Enable service
+puts 'Enable service ...'
+system "update-rc.d nginx defaults"
+# Start server
+system "service nginx restart"
+puts 'Starting nginx server...[OK]'
+# Installing redis
+puts 'Redis server installation...'
+system "apt-get -y install -y redis-server > /dev/null 2>&1"
+system "service redis-server status"
+puts 'Server status...'
+# Start server
+system "service redis-server restart"
+puts 'Server start...[OK]'
