@@ -47,3 +47,27 @@ puts 'Server status...'
 # Start server
 system "service redis-server restart"
 puts 'Server start...[OK]'
+# Opening a web page
+puts 'HTML page generating..'
+index=File.open("/usr/share/nginx/html/index.html","w+")
+index.write("<!DOCTYPE html>
+<html>
+<head>
+<title>My Nginx Welcome Page!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1><center>This is my welcome page served by Nginx !</center></h1>
+<p><center>Generate an HTML page from a ruby script.</center></p>
+<p><em><center>Thank you for using nginx !!</center></em></p>
+</body>
+</html>")
+# Restart server
+puts 'Restart server... [OK]'
+system "service nginx restart"
